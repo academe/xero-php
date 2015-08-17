@@ -317,7 +317,7 @@ class Contact extends Remote\Object {
             'ContactGroups' => array (false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\ContactGroup', true, false),
             'Website' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'BrandingTheme' => array (false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\BrandingTheme', false, false),
-            'BatchPayments' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
+            'BatchPayments' => array (false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\BatchPayments', true, false),
             'Discount' => array (false, self::PROPERTY_TYPE_FLOAT, null, false, false),
             'Balances' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
             'PaymentTerms' => array (false, self::PROPERTY_TYPE_OBJECT, 'Accounting\\Organisation\\PaymentTerm', true, false),

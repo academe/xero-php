@@ -43,7 +43,7 @@ class PayTemplate extends Remote\Object {
     /**
      * The Units or Hours for the earnings line
      *
-     * @property string[] UnitsOrHours
+     * @property string UnitsOrHours
      */
 
     /**
@@ -175,7 +175,7 @@ class PayTemplate extends Remote\Object {
             'ReimbursementLines' => array (false, self::PROPERTY_TYPE_OBJECT, 'PayrollUS\\Paystub\\ReimbursementLine', true, false),
             'BenefitLines' => array (false, self::PROPERTY_TYPE_OBJECT, 'PayrollUS\\Paystub\\BenefitLine', true, false),
             'EarningsTypeID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
-            'UnitsOrHours' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
+            'UnitsOrHours' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'RatePerUnit' => array (false, self::PROPERTY_TYPE_FLOAT, null, false, false),
             'Amount' => array (false, self::PROPERTY_TYPE_FLOAT, null, false, false),
             'DeductionTypeID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
@@ -193,7 +193,7 @@ class PayTemplate extends Remote\Object {
     }
 
     /**
-     * @return float[]|Collection
+     * @return float[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getEarningsLines() {
@@ -206,12 +206,15 @@ class PayTemplate extends Remote\Object {
      */
     public function addEarningsLine($value) {
         $this->propertyUpdated('EarningsLines', $value);
+        if(!isset($this->_data['EarningsLines'])){
+            $this->_data['EarningsLines'] = new Remote\Collection();
+        }
         $this->_data['EarningsLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return DeductionLine[]|Collection
+     * @return DeductionLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getDeductionLines() {
@@ -224,12 +227,15 @@ class PayTemplate extends Remote\Object {
      */
     public function addDeductionLine(DeductionLine $value) {
         $this->propertyUpdated('DeductionLines', $value);
+        if(!isset($this->_data['DeductionLines'])){
+            $this->_data['DeductionLines'] = new Remote\Collection();
+        }
         $this->_data['DeductionLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return ReimbursementLine[]|Collection
+     * @return ReimbursementLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getReimbursementLines() {
@@ -242,12 +248,15 @@ class PayTemplate extends Remote\Object {
      */
     public function addReimbursementLine(ReimbursementLine $value) {
         $this->propertyUpdated('ReimbursementLines', $value);
+        if(!isset($this->_data['ReimbursementLines'])){
+            $this->_data['ReimbursementLines'] = new Remote\Collection();
+        }
         $this->_data['ReimbursementLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return BenefitLine[]|Collection
+     * @return BenefitLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getBenefitLines() {
@@ -260,6 +269,9 @@ class PayTemplate extends Remote\Object {
      */
     public function addBenefitLine(BenefitLine $value) {
         $this->propertyUpdated('BenefitLines', $value);
+        if(!isset($this->_data['BenefitLines'])){
+            $this->_data['BenefitLines'] = new Remote\Collection();
+        }
         $this->_data['BenefitLines'][] = $value;
         return $this;
     }
@@ -282,8 +294,7 @@ class PayTemplate extends Remote\Object {
     }
 
     /**
-     * @return string[]|Collection
-     * Always returns a collection, switch is for type hinting
+     * @return string
      */
     public function getUnitsOrHours() {
         return $this->_data['UnitsOrHours'];
@@ -293,9 +304,9 @@ class PayTemplate extends Remote\Object {
      * @param string $value
      * @return PayTemplate
      */
-    public function addUnitsOrHour($value) {
+    public function setUnitsOrHour($value) {
         $this->propertyUpdated('UnitsOrHours', $value);
-        $this->_data['UnitsOrHours'][] = $value;
+        $this->_data['UnitsOrHours'] = $value;
         return $this;
     }
 

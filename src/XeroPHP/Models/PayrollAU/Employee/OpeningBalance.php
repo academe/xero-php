@@ -37,7 +37,7 @@ class OpeningBalance extends Remote\Object {
     /**
      * The SuperLines of the OpeningBalance.
      *
-     * @property string[] SuperLines
+     * @property string SuperLines
      */
 
     /**
@@ -49,7 +49,7 @@ class OpeningBalance extends Remote\Object {
     /**
      * The LeaveLines of the OpeningBalance.
      *
-     * @property string[] LeaveLines
+     * @property string LeaveLines
      */
 
     /**
@@ -97,7 +97,7 @@ class OpeningBalance extends Remote\Object {
     /**
      * Leave number of units
      *
-     * @property string[] NumberOfUnits
+     * @property string NumberOfUnits
      */
 
 
@@ -167,9 +167,9 @@ class OpeningBalance extends Remote\Object {
             'Tax' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'EarningsLines' => array (false, self::PROPERTY_TYPE_OBJECT, 'PayrollAU\\Payslip\\EarningsLine', true, false),
             'DeductionLines' => array (false, self::PROPERTY_TYPE_OBJECT, 'PayrollAU\\Payslip\\DeductionLine', true, false),
-            'SuperLines' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
+            'SuperLines' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'ReimbursementLines' => array (false, self::PROPERTY_TYPE_OBJECT, 'PayrollAU\\Payslip\\ReimbursementLine', true, false),
-            'LeaveLines' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
+            'LeaveLines' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'EarningsRateID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'Amount' => array (false, self::PROPERTY_TYPE_FLOAT, null, false, false),
             'DeductionTypeID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
@@ -177,7 +177,7 @@ class OpeningBalance extends Remote\Object {
             'CalculationType' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'ReimbursementTypeID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'LeaveTypeID' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
-            'NumberOfUnits' => array (false, self::PROPERTY_TYPE_STRING, null, true, false)
+            'NumberOfUnits' => array (false, self::PROPERTY_TYPE_STRING, null, false, false)
         );
     }
 
@@ -220,7 +220,7 @@ class OpeningBalance extends Remote\Object {
     }
 
     /**
-     * @return EarningsLine[]|Collection
+     * @return EarningsLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getEarningsLines() {
@@ -233,12 +233,15 @@ class OpeningBalance extends Remote\Object {
      */
     public function addEarningsLine(EarningsLine $value) {
         $this->propertyUpdated('EarningsLines', $value);
+        if(!isset($this->_data['EarningsLines'])){
+            $this->_data['EarningsLines'] = new Remote\Collection();
+        }
         $this->_data['EarningsLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return DeductionLine[]|Collection
+     * @return DeductionLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getDeductionLines() {
@@ -251,13 +254,15 @@ class OpeningBalance extends Remote\Object {
      */
     public function addDeductionLine(DeductionLine $value) {
         $this->propertyUpdated('DeductionLines', $value);
+        if(!isset($this->_data['DeductionLines'])){
+            $this->_data['DeductionLines'] = new Remote\Collection();
+        }
         $this->_data['DeductionLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return string[]|Collection
-     * Always returns a collection, switch is for type hinting
+     * @return string
      */
     public function getSuperLines() {
         return $this->_data['SuperLines'];
@@ -267,14 +272,14 @@ class OpeningBalance extends Remote\Object {
      * @param string $value
      * @return OpeningBalance
      */
-    public function addSuperLine($value) {
+    public function setSuperLine($value) {
         $this->propertyUpdated('SuperLines', $value);
-        $this->_data['SuperLines'][] = $value;
+        $this->_data['SuperLines'] = $value;
         return $this;
     }
 
     /**
-     * @return ReimbursementLine[]|Collection
+     * @return ReimbursementLine[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getReimbursementLines() {
@@ -287,13 +292,15 @@ class OpeningBalance extends Remote\Object {
      */
     public function addReimbursementLine(ReimbursementLine $value) {
         $this->propertyUpdated('ReimbursementLines', $value);
+        if(!isset($this->_data['ReimbursementLines'])){
+            $this->_data['ReimbursementLines'] = new Remote\Collection();
+        }
         $this->_data['ReimbursementLines'][] = $value;
         return $this;
     }
 
     /**
-     * @return string[]|Collection
-     * Always returns a collection, switch is for type hinting
+     * @return string
      */
     public function getLeaveLines() {
         return $this->_data['LeaveLines'];
@@ -303,9 +310,9 @@ class OpeningBalance extends Remote\Object {
      * @param string $value
      * @return OpeningBalance
      */
-    public function addLeaveLine($value) {
+    public function setLeaveLine($value) {
         $this->propertyUpdated('LeaveLines', $value);
-        $this->_data['LeaveLines'][] = $value;
+        $this->_data['LeaveLines'] = $value;
         return $this;
     }
 
@@ -429,8 +436,7 @@ class OpeningBalance extends Remote\Object {
     }
 
     /**
-     * @return string[]|Collection
-     * Always returns a collection, switch is for type hinting
+     * @return string
      */
     public function getNumberOfUnits() {
         return $this->_data['NumberOfUnits'];
@@ -440,9 +446,9 @@ class OpeningBalance extends Remote\Object {
      * @param string $value
      * @return OpeningBalance
      */
-    public function addNumberOfUnit($value) {
+    public function setNumberOfUnit($value) {
         $this->propertyUpdated('NumberOfUnits', $value);
-        $this->_data['NumberOfUnits'][] = $value;
+        $this->_data['NumberOfUnits'] = $value;
         return $this;
     }
 

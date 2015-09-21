@@ -41,7 +41,7 @@ class Employee extends Remote\Object {
     /**
      * Middle name(s) of the employee (max length = 35)
      *
-     * @property string[] MiddleNames
+     * @property string MiddleNames
      */
 
     /**
@@ -252,7 +252,7 @@ class Employee extends Remote\Object {
             'LastName' => array (true, self::PROPERTY_TYPE_STRING, null, false, false),
             'DateOfBirth' => array (true, self::PROPERTY_TYPE_DATE, '\\DateTime', false, false),
             'HomeAddress' => array (true, self::PROPERTY_TYPE_OBJECT, 'PayrollUS\\Employee\\HomeAddress', false, false),
-            'MiddleNames' => array (false, self::PROPERTY_TYPE_STRING, null, true, false),
+            'MiddleNames' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'JobTitle' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'Email' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
             'Gender' => array (false, self::PROPERTY_TYPE_STRING, null, false, false),
@@ -352,8 +352,7 @@ class Employee extends Remote\Object {
     }
 
     /**
-     * @return string[]|Collection
-     * Always returns a collection, switch is for type hinting
+     * @return string
      */
     public function getMiddleNames() {
         return $this->_data['MiddleNames'];
@@ -363,9 +362,9 @@ class Employee extends Remote\Object {
      * @param string $value
      * @return Employee
      */
-    public function addMiddleName($value) {
+    public function setMiddleName($value) {
         $this->propertyUpdated('MiddleNames', $value);
-        $this->_data['MiddleNames'][] = $value;
+        $this->_data['MiddleNames'] = $value;
         return $this;
     }
 
@@ -625,7 +624,7 @@ class Employee extends Remote\Object {
     }
 
     /**
-     * @return SalaryAndWage[]|Collection
+     * @return SalaryAndWage[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getSalaryAndWages() {
@@ -638,12 +637,15 @@ class Employee extends Remote\Object {
      */
     public function addSalaryAndWage(SalaryAndWage $value) {
         $this->propertyUpdated('SalaryAndWages', $value);
+        if(!isset($this->_data['SalaryAndWages'])){
+            $this->_data['SalaryAndWages'] = new Remote\Collection();
+        }
         $this->_data['SalaryAndWages'][] = $value;
         return $this;
     }
 
     /**
-     * @return WorkLocation[]|Collection
+     * @return WorkLocation[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getWorkLocations() {
@@ -656,6 +658,9 @@ class Employee extends Remote\Object {
      */
     public function addWorkLocation(WorkLocation $value) {
         $this->propertyUpdated('WorkLocations', $value);
+        if(!isset($this->_data['WorkLocations'])){
+            $this->_data['WorkLocations'] = new Remote\Collection();
+        }
         $this->_data['WorkLocations'][] = $value;
         return $this;
     }
@@ -695,7 +700,7 @@ class Employee extends Remote\Object {
     }
 
     /**
-     * @return OpeningBalance[]|Collection
+     * @return OpeningBalance[]|Remote\Collection
      * Always returns a collection, switch is for type hinting
      */
     public function getOpeningBalances() {
@@ -708,6 +713,9 @@ class Employee extends Remote\Object {
      */
     public function addOpeningBalance(OpeningBalance $value) {
         $this->propertyUpdated('OpeningBalances', $value);
+        if(!isset($this->_data['OpeningBalances'])){
+            $this->_data['OpeningBalances'] = new Remote\Collection();
+        }
         $this->_data['OpeningBalances'][] = $value;
         return $this;
     }
